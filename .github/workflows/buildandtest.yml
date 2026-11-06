@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "buildandtest.yml"
+# Estimated savings: ~2 min/run
+#
 name: Build and Test 🚀✅
 
 on:
@@ -25,6 +30,10 @@ on:
     - 'src/sdk/PnP.Core.Admin.Test/**'
     - 'src/sdk/PnP.Core.Provisioning.Test/**'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     if: github.repository_owner == 'pnp'
